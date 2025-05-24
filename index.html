@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Through Our Cosmos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Orbitron', sans-serif; /* Changed font */
+            margin: 0;
+            padding: 0;
+            background: url('image/solar system.jpg') no-repeat center center fixed; /* New background image */
+            background-size: cover;
+            color: #e0e0e0; /* Slightly off-white for softer look */
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.4); /* Slightly darker, semi-transparent background */
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem; /* Larger heading */
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Glowing effect */
+        }
+
+        .intro-text {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 15px auto 40px auto; /* Centered with more space */
+            color: #d1eaff; /* Light blue tint */
+        }
+
+        /* Planet Cards */
+        .planet-container {
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow items to wrap to next line */
+            justify-content: center; /* Center planets horizontally */
+            gap: 30px; /* Space between planet cards */
+            padding: 20px;
+        }
+
+        .planet {
+            background-color: rgba(30, 30, 60, 0.7); /* Semi-transparent darker background for cards */
+            border-radius: 15px; /* Rounded corners for cards */
+            padding: 20px;
+            width: 220px; /* Fixed width for each card */
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.2); /* Subtle card shadow */
+            position: relative; /* For learn more button positioning */
+            overflow: hidden; /* Hide overflow of image scale */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .planet:hover {
+            transform: translateY(-10px) scale(1.02); /* Lift and slightly enlarge on hover */
+            box-shadow: 0 10px 30px rgba(0, 200, 255, 0.6); /* More prominent shadow on hover */
+        }
+
+        .planet img {
+            width: 140px; /* Slightly smaller image */
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.6); /* White border around images */
+            object-fit: cover; /* Ensure image covers the area */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .planet img:hover {
+            transform: scale(1.1); /* Image zooms less, as card scales */
+            /* box-shadow is now on the card, not the image */
+        }
+
+        .planet p {
+            margin-top: 15px;
+            font-size: 1.3rem; /* Slightly larger planet names */
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .planet .note {
+            font-size: 0.95rem;
+            margin-top: 10px;
+            color: #b0e0ff; /* Lighter blue for notes */
+            min-height: 50px; /* Ensure notes have similar height */
+        }
+
+        /* Learn More Button (Concept for future JavaScript) */
+        .learn-more-btn {
+            display: inline-block;
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            opacity: 0; /* Hidden by default */
+            transform: translateY(10px); /* Starts slightly below */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .planet:hover .learn-more-btn {
+            opacity: 1; /* Visible on card hover */
+            transform: translateY(0); /* Slides up into place */
+        }
+
+        .learn-more-btn:hover {
+            background-color: #0056b3; /* Darker blue on button hover */
+        }
+
+
+        /* Video Section */
+        .video-section {
+            margin: 50px auto;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        video {
+            width: 100%; /* Make video responsive within its container */
+            max-width: 800px; /* Max width for larger screens */
+            border: 3px solid #88c0ff; /* Lighter blue border */
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(136, 192, 255, 0.7); /* Matching shadow */
+            display: block; /* Remove extra space below video */
+            margin: 0 auto; /* Center video */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding: 25px 20px;
+            background-color: rgba(25, 25, 50, 0.9); /* Darker, less transparent footer */
+            font-size: 0.9rem;
+            color: #a0a0a0; /* Softer gray color */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design - Basic Media Query */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .intro-text {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+
+            .planet {
+                width: 85%; /* Make cards take more width on small screens */
+                margin: 15px auto; /* Center cards */
+            }
+
+            .planet-container {
+                gap: 20px; /* Reduce gap on small screens */
+            }
+
+            video {
+                width: 95%; /* Make video almost full width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+            }
+
+            .planet img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .planet p {
+                font-size: 1.1rem;
+            }
+
+            .planet .note {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Journey Through Our Cosmos</h1>
+        <p class="intro-text">
+            Embark on a captivating voyage across the solar system and uncover the unique wonders of each celestial body,
+            from the scorching plains of Mercury to the icy depths of Neptune.
+        </p>
+    </header>
+
+    <main>
+        <div class="planet-container">
+            <div class="planet">
+                <img src="image/my.jpg" alt="Mercury">
+                <p>Mercury</p>
+                <p class="note">The smallest planet and closest to the Sun, known for its extreme temperature swings.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/Venus.jpg" alt="Venus">
+                <p>Venus</p>
+                <p class="note">Earth's "twin" in size, but a scorching hot world with a runaway greenhouse effect.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/BB.jpg" alt="Earth"> <p>Earth</p>
+                <p class="note">Our vibrant home, unique for its liquid water and diverse life forms.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/MaRs.jpg" alt="Mars">
+                <p>Mars</p>
+                <p class="note">The "Red Planet," a primary target for future human exploration and colonization.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/Jup.jpg" alt="Jupiter">
+                <p>Jupiter</p>
+                <p class="note">The solar system's largest planet, a gas giant with a famous Great Red Spot.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/saturn.jpg" alt="Saturn">
+                <p>Saturn</p>
+                <p class="note">Instantly recognizable by its magnificent system of icy rings.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/uranus.jpg" alt="Uranus">
+                <p>Uranus</p>
+                <p class="note">An ice giant that rotates on its side, shrouded in a thick, cold atmosphere.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+            <div class="planet">
+                <img src="image/neptune.jpg" alt="Neptune">
+                <p>Neptune</p>
+                <p class="note">The most distant known planet, a dark, cold, and extremely windy ice giant.</p>
+                <a href="#" class="learn-more-btn"><i class="fas fa-lightbulb"></i> Learn More</a>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2>Experience the Solar System</h2>
+            <video controls>
+                <source src="solar.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cosmic Journeys. All rights reserved.</p>
+        <p>Illustrations by [Your Name/Source Here]</p>
+    </footer>
+</body>
+</html>
+
+
+
